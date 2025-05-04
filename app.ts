@@ -13,7 +13,7 @@ refreshButton.addEventListener('click', loadItems)
 declare var loginModal: IonModal
 declare var errorToast: IonToast
 
-declare var courseList: IonList
+let petList: IonList = document.querySelector('#pet-list')!
 
 let page = 1
 
@@ -29,20 +29,20 @@ nextPageButton.addEventListener('click', () => {
   loadItems()
 })
 
-let skeletonItem = courseList.querySelector('.skeleton-item')!
+let skeletonItem = petList.querySelector('.skeleton-item')!
 skeletonItem.remove()
 
-let itemCardTemplate = courseList.querySelector('.item-card')!
+let itemCardTemplate = petList.querySelector('.item-card')!
 itemCardTemplate.remove()
 
 let token = localStorage.getItem('token')
 
 async function loadItems() {
   console.log('loading items...')
-  courseList.textContent = ''
-  courseList.appendChild(skeletonItem.cloneNode(true))
-  courseList.appendChild(skeletonItem.cloneNode(true))
-  courseList.appendChild(skeletonItem.cloneNode(true))
+  petList.textContent = ''
+  petList.appendChild(skeletonItem.cloneNode(true))
+  petList.appendChild(skeletonItem.cloneNode(true))
+  petList.appendChild(skeletonItem.cloneNode(true))
   let params = new URLSearchParams()
   params.set('page', page.toString())
   let res = await fetch(`${baseUrl}/pet-breeds?${params}`, {
@@ -53,7 +53,7 @@ async function loadItems() {
   if (json.error) {
     errorToast.message = json.error
     errorToast.present()
-    courseList.textContent = ''
+    petList.textContent = ''
     return
   }
   errorToast.dismiss()
@@ -76,29 +76,29 @@ async function loadItems() {
   type Item = {
     id: number
     tags: string[]
-    license: string
-    schematic_url: string
-    manufacturer: string
+    origin: string
+    lifespan: string
+    size: string
     title: string
     description: string
     category: string
     image_url: string
     video_url: string
     published_at: string
-    components: string[]
+    temperaments: string[]
   }
   let items = json.items as Item[]
   console.log('items:', items)
 
   let bookmarkedItemIds = await autoRetryGetBookmarks()
 
-  courseList.textContent = ''
+  petList.textContent = ''
   for (let item of items) {
     let card = itemCardTemplate.cloneNode(true) as HTMLIonCardElement
 
     card.querySelector('.item-title')!.textContent = item.title
     card.querySelector('.item-subtitle')!.textContent =
-      item.components.join(', ') + ' | ' + item.license
+      item.temperaments.join(', ') + ' | ' + item.origin
 
     let favoriteBtn = card.querySelector('.favorite-btn')!
     let favoriteIcon = favoriteBtn.querySelector('ion-icon')!
@@ -151,7 +151,7 @@ async function loadItems() {
       })
       tagContainer.appendChild(chip)
     }
-    courseList.appendChild(card)
+    petList.appendChild(card)
   }
 }
 loadItems()
@@ -213,6 +213,9 @@ async function unBookmarkItem(item_id: number, icon: HTMLIonIconElement) {
   }
 }
 async function getBookmarks() {
+    if(!token){
+        return[]
+    }
   let res = await fetch(`${baseUrl}/bookmarks`, {
     headers: { Authorization: `Bearer ${token}` },
   })

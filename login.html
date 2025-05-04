@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登錄</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
+    <style>
+      ion-content {
+        --background: var(--ion-color-light);
+      }
+      .login-container {
+        max-width: 400px;
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+      ion-button {
+        margin-top: 1rem;
+      }
+      .register-link {
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--ion-color-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <ion-app>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>登錄</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="login-container">
+          <ion-item>
+            <ion-label position="floating">用戶名</ion-label>
+            <ion-input id="username" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">密碼</ion-label>
+            <ion-input id="password" type="password"></ion-input>
+          </ion-item>
+          <ion-button expand="block" id="loginButton">登錄</ion-button>
+          <div class="register-link">
+            <a href="register.html">還沒有帳戶？點擊注冊</a>
+          </div>
+          <ion-toast id="errorToast" duration="5000" color="danger"></ion-toast>
+          <ion-toast id="successToast" duration="3000" color="success"></ion-toast>
+        </div>
+      </ion-content>
+    </ion-app>
+    <script>
+      const baseUrl = 'https://dae-mobile-assignment.hkit.cc/api';
+      const loginButton = document.querySelector('#loginButton');
+      const usernameInput = document.querySelector('#username');
+      const passwordInput = document.querySelector('#password');
+      const errorToast = document.querySelector('#errorToast');
+      const successToast = document.querySelector('#successToast');
+
+      loginButton.addEventListener('click', async () => {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!username || !password) {
+          errorToast.message = '請輸入用戶名和密碼';
+          errorToast.present();
+          return;
+        }
+
+        try {
+          console.log('Sending login request:', { username, password });
+          const res = await fetch(`${baseUrl}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+          });
+          const json = await res.json();
+          console.log('Login response:', json);
+
+          if (json.error) {
+            console.error('Login error:', json.error);
+            errorToast.message = json.error;
+            errorToast.present();
+            return;
+          }
+
+          if (json.token) {
+            localStorage.setItem('token', json.token);
+            localStorage.setItem('username', username);
+            console.log('Token saved:', json.token);
+            console.log('Username saved:', username);
+            console.log('LocalStorage after save:', {
+              token: localStorage.getItem('token'),
+              username: localStorage.getItem('username'),
+            });
+            successToast.message = '登錄成功';
+            successToast.present();
+            setTimeout(() => {
+              window.location.href = 'apps.html';
+            }, 1500);
+          } else {
+            console.error('No token received:', json);
+            errorToast.message = '登錄成功，但未收到 token';
+            errorToast.present();
+          }
+        } catch (error) {
+          console.error('Fetch error:', error);
+          errorToast.message = '登錄失敗，請檢查網絡或稍後再試';
+          errorToast.present();
+        }
+      });
+    </script>
+  </body>
+</html>

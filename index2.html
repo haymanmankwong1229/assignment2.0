@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>開源硬體清單</title>
+    <title>The pet</title>
     <!-- Ionic CDN -->
     <script
       type="module"
@@ -22,36 +22,97 @@
   <body>
     <ion-app>
       <ion-header>
-        <ion-toolbar class="soft-toolbar">
+        <ion-toolbar class="soft-toolbar" color="primary">
           <ion-title>The Pet</ion-title>
-
-          <ion-item>
-            <ion-select id="categorySelect" label="分類" interface="popover">
-              <ion-select-option value="">全部</ion-select-option>
-              <ion-select-option value="貓類">貓類</ion-select-option>
-              <ion-select-option value="狗類">狗類</ion-select-option>
-              <ion-select-option value="魚類">魚類</ion-select-option>
-              <ion-select-option value="鼠類">鼠類</ion-select-option>
-              <ion-select-option value="兔類">兔類</ion-select-option>
-              <ion-select-option value="鳥類">鳥類</ion-select-option>
-              <ion-select-option value="爬蟲類">爬蟲類</ion-select-option>
-            </ion-select>
-            <ion-select id="sizeSelect" label="體型" interface="popover">
-              <ion-select-option value="size">體型</ion-select-option>
-              <ion-select-option value="小型">小型</ion-select-option>
-              <ion-select-option value="中型">中型</ion-select-option>
-              <ion-select-option value="大型">大型</ion-select-option>
-                 </ion-select
-            >
-          </ion-item>
-          <ion-searchbar id="searchBar" placeholder="搜尋..."></ion-searchbar>
+          <ion-buttons slot="end">
+            <ion-button color="light" id="refreshButton">
+              <ion-icon name="refresh" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+         
         </ion-toolbar>
+        <ion-item>
+          <ion-select id="categorySelect" label="分類" interface="popover">
+            <ion-select-option value="">全部</ion-select-option>
+            <ion-select-option value="貓類">貓類</ion-select-option>
+            <ion-select-option value="狗類">狗類</ion-select-option>
+            <ion-select-option value="魚類">魚類</ion-select-option>
+            <ion-select-option value="鼠類">鼠類</ion-select-option>
+            <ion-select-option value="兔類">兔類</ion-select-option>
+            <ion-select-option value="鳥類">鳥類</ion-select-option>
+            <ion-select-option value="爬蟲類">爬蟲類</ion-select-option>
+          </ion-select>
+          <ion-select id="sizeSelect" label="體型" interface="popover">
+            <ion-select-option value="size">體型</ion-select-option>
+            <ion-select-option value="小型">小型</ion-select-option>
+            <ion-select-option value="中型">中型</ion-select-option>
+            <ion-select-option value="大型">大型</ion-select-option>
+               </ion-select
+          >
+        </ion-item>
+        <ion-searchbar id="searchBar" placeholder="搜尋..."></ion-searchbar>
       </ion-header>
 
       <ion-content>
         <ion-list id="pet-list">
           <!-- 清單項目範本 -->
           <!-- 這些項目會通過 JavaScript 動態生成 -->
+
+          <ion-item class="skeleton-item">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text animated="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text
+                  animated="true"
+                  style="width: 80%"
+                ></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text
+                  animated="true"
+                  style="width: 60%"
+                ></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text
+                  animated="true"
+                  style="width: 30%"
+                ></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+
+          <ion-card class="item-card">
+            <ion-card-header>
+              <ion-card-title class="item-title"></ion-card-title>
+              <ion-card-subtitle class="item-subtitle"></ion-card-subtitle>
+              <ion-button class="favorite-btn" fill="clear">
+                <ion-icon name="star" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-card-header>
+            <ion-card-content>
+              <p class="item-details"></p>
+              <div class="item-date"></div>
+              <div class="media-content">
+                <img class="course-image" src="" loading="lazy" />
+                <div class="video-container">
+                  <iframe src="" frameborder="0" allowfullscreen></iframe>
+                  <video controls>
+                    <source src="" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+              <div class="tag-container">
+                <ion-chip class="tag" data-type="sample-tag">
+                  sample-tag-name
+                </ion-chip>
+              </div>
+            </ion-card-content>
+          </ion-card>
+
+
         </ion-list>
       </ion-content>
           </ion-card>
