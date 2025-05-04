@@ -1,0 +1,217 @@
+body {
+    font-family: system-ui;
+    margin: 0;
+    padding: 0;
+  }
+  
+  ion-content {
+    padding: 1rem;
+  }
+  
+  .item-content {
+    width: 100%;
+  }
+  
+  .item-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+    background-color: rgb(179, 249, 226);
+
+    border-top-left-radius: 2em 0.5em;
+    border-top-right-radius: 1em 3em;
+    border-bottom-right-radius: 4em 0.5em;
+    border-bottom-left-radius: 1em 3em;
+  }
+  
+  .title-bold {
+    font-weight: bold;
+  }
+  
+  .item-subtitle {
+    color: var(--ion-color-medium);
+    margin: 0.25rem 0;
+  }
+  
+  .soft-toolbar {
+    --background: #fdf2fa; 
+    --color: #317823; 
+    
+  }
+  
+  .reset-btn {
+    --background: #ccc; /* 預設灰色 */
+    --color: #fff; /* 字白色 */
+    --border-radius: 12px;
+    width: 100%; /* 🔥 令按鈕變成打橫一條長條型 */
+    display: block;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .reset-btn:active {
+    --background: #92a8d1; /* 按住時閃藍色 */
+  }
+  
+  .card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .item-details,
+  .caution-details {
+    line-height: 1.6;
+  }
+  
+  .caution-details {
+    font-size: 0.95em;
+    color: var(--ion-color-danger);
+    margin-bottom: 0.5rem;
+  }
+  
+  .tag {
+    background-color: var(--ion-color-primary-tint);
+    color: var(--ion-color-primary-contrast);
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.8em;
+  }
+  
+  img {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  iframe {
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  @media screen and (max-width: 480px) {
+    iframe {
+      height: 180px;
+    }
+  }
+  
+  .responsive-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .responsive-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .main-content {
+    --background: #fdeee6;
+  }
+  
+  /* 響應式設計 */
+  @media (max-width: 600px) {
+    /* 小型螢幕（手機） */
+    ion-item {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .category-tag {
+      font-size: 12px;
+      padding: 5px;
+    }
+  
+    ion-label {
+      font-size: 16px;
+    }
+  
+    body {
+      overflow-x: hidden; /* 防止橫向捲動 */
+    }
+  
+    ion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 1024px) {
+    /* 中型螢幕（平板） */
+    ion-item {
+      font-size: 16px;
+      padding: 15px;
+    }
+  
+    .category-tag {
+      font-size: 14px;
+    }
+  
+    ion-label {
+      font-size: 18px;
+    }
+  
+    ion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    /* 大型螢幕（桌面） */
+    ion-item {
+      font-size: 18px;
+      padding: 20px;
+    }
+  
+    .category-tag {
+      font-size: 16px;
+    }
+  
+    ion-label {
+      font-size: 20px;
+    }
+  
+    ion-list {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(250px, 1fr)
+      ); /* 自動填充，並設置最小寬度 */
+      gap: 15px;
+    }
+  
+    body {
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+  
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-row ion-select {
+    flex: 1;
+    min-width: 120px;
+  }

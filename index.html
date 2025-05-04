@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Pet</title>
+    <!-- Ionic CDN -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      ion-content {
+        --background: #b8ffde;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ion-app>
+      <ion-header>
+        <ion-toolbar class="soft-toolbar">
+          <ion-title>The Pet</ion-title>
+
+          <ion-item>
+            <ion-select id="categorySelect" label="分類" interface="popover">
+              <ion-select-option value="">全部</ion-select-option>
+              <ion-select-option value="貓類">貓類</ion-select-option>
+              <ion-select-option value="狗類">狗類</ion-select-option>
+              <ion-select-option value="魚類">魚類</ion-select-option>
+              <ion-select-option value="鼠類">鼠類</ion-select-option>
+              <ion-select-option value="兔類">兔類</ion-select-option>
+              <ion-select-option value="鳥類">鳥類</ion-select-option>
+              <ion-select-option value="爬蟲類">爬蟲類</ion-select-option>
+            </ion-select>
+            <ion-select id="sizeSelect" label="體型" interface="popover">
+              <ion-select-option value="size">體型</ion-select-option>
+              <ion-select-option value="小型">小型</ion-select-option>
+              <ion-select-option value="中型">中型</ion-select-option>
+              <ion-select-option value="大型">大型</ion-select-option>
+                 </ion-select
+            >
+          </ion-item>
+          <ion-searchbar id="searchBar" placeholder="搜尋..."></ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list id="pet-list">
+          <!-- 清單項目範本 -->
+          <!-- 這些項目會通過 JavaScript 動態生成 -->
+        </ion-list>
+      </ion-content>
+    </ion-app>
+
+    <script>
+      const items = [
+        {
+          breed: "英國短毛貓",
+          size: "中型",
+          character: "溫順",
+          cares: "梳毛",
+          tags: ["貓類", "溫順"],
+          imageUrl:
+            "https://i.pinimg.com/736x/22/0f/d7/220fd7ab3901edfb2bbe0370f0ea9806.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/KgwWGZGwkE4?si=wZQKuEm1cRocut6E",
+        },
+        {
+          breed: "哈士奇",
+          size: "大型",
+          character: "活潑",
+          cares: "運動量大",
+          tags: ["狗類", "活潑"],
+          imageUrl:
+            "https://images.chinatimes.com/newsphoto/2021-04-13/656/20210413004121.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/NvhcAqziatc?si=ASNdVIE7TzG69xpT",
+        },
+        {
+          breed: "小丑魚",
+          size: "小型",
+          character: "獨立",
+          cares: "水質要求高",
+          tags: ["魚類", "獨立"],
+          imageUrl: "https://imgs.699pic.com/images/600/320/793.jpg!detail.v1",
+          videoUrl:
+            "https://www.youtube.com/embed/EEVasLaoJFY?si=3_ijptpsp6UiIacx",
+        },
+        {
+          breed: "灰鸚鵡",
+          size: "中型",
+          character: "聰明",
+          cares: "社交",
+          tags: ["鳥類", "聰明"],
+          imageUrl:
+            "https://thumb.photo-ac.com/85/8524c552d80b118d100aa9c4662446c4_t.jpeg",
+          videoUrl:
+            "https://www.youtube.com/embed/h8KO26K9GT8?si=W4Y6AxUJH8oNesLz",
+        },
+        {
+          breed: "倉鼠",
+          size: "小型",
+          character: "熱情",
+          cares: "環境要求高",
+          tags: ["鼠類", "熱情"],
+          imageUrl:
+            "https://file.moyublog.com/d/file/2024-12-15/d95ea197c16e9833f350463dcf6bf293.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/0U4UF5ieHEc?si=bqygDwKL8JokPTfY",
+        },
+        {
+          breed: "垂耳兔",
+          size: "中型",
+          character: "溫順",
+          cares: "梳毛",
+          tags: ["兔類", "溫順"],
+          imageUrl:
+            "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/osfNHN7DBoDoWRzEWlFeVEA5BAAzIAEvy7AGfA~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&lk3s=138a59ce&s=PackSourceEnum_SEARCH&sc=image&se=false&x-expires=1746925200&x-signature=EquJW%2FLs5kc%2F2bl1Uivr7SoyIf8%3D",
+          videoUrl:
+            "https://www.youtube.com/embed/cAP8EHOs6m0?si=6XqmBzJY5TXJ5-zr",
+        },
+        {
+          breed: "七彩變色龍",
+          size: "中型",
+          character: "獨立",
+          cares: "曬太陽",
+          tags: ["爬蟲類", "獨立"],
+          imageUrl:
+            "https://www.reptile.com.tw/wp-content/uploads/2023/05/Furcifer-pardalis-Nosy-Faly-male-2019-7.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/82r4XB4cm98?si=MpYJawtX7V75k2VR",
+        },
+        {
+          breed: "緬因貓",
+          size: "大型",
+          character: "獨立",
+          cares: "梳毛",
+          tags: ["貓類", "獨立"],
+          imageUrl:
+            "https://media.istockphoto.com/id/824176616/zh/%E7%85%A7%E7%89%87/%E7%B7%AC%E5%9B%A0%E6%B5%A3%E7%86%8A%E4%B8%8A%E7%99%BD%E8%89%B2%E5%AD%A4%E7%AB%8B.jpg?s=612x612&w=0&k=20&c=ZxMXLV9SPH6ouFVO8yAUsBD1CwdqE-fy9lt2GC9ISak=",
+          videoUrl:
+            "https://www.youtube.com/embed/O3iSrPYYLgw?si=rIbbQ2aOvVJRrRsj",
+        },
+        {
+          breed: "德文卷毛貓",
+          size: "中型",
+          character: "活潑",
+          cares: "環境要求高",
+          tags: ["貓類", "活潑"],
+          imageUrl:
+            "https://gw.alicdn.com/imgextra/i3/2216934936401/O1CN01WpmgbW1x9i94gwCru_!!2216934936401.jpg_Q75.jpg_.webp",
+          videoUrl:
+            "https://www.youtube.com/embed/J9xtaPkAM-c?si=tSZGKbPtPTep9Rbd",
+        },
+        {
+          breed: "比熊犬",
+          size: "小型",
+          character: "熱情",
+          cares: "梳毛",
+          tags: ["狗類", "熱情"],
+          imageUrl:
+            "https://png.pngtree.com/thumb_back/fh260/background/20230523/pngtree-bichon-faucon-running-along-a-dirt-path-image_2674446.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/7RxpBGykeYk?si=SoY7KP1xZlyeryDU",
+        },
+        {
+          breed: "拉布拉多",
+          size: "大型",
+          character: "社交",
+          cares: "運動量大",
+          tags: ["狗類", "社交"],
+          imageUrl:
+            "https://media.istockphoto.com/id/122286715/zh/%E7%85%A7%E7%89%87/white-labrador-retriever-on-a-white-background.jpg?s=612x612&w=0&k=20&c=cwR-NEouqj3iE4YolVfrA-L9KXrWB50r4yLFiEiqOkw=",
+          videoUrl:
+            "https://www.youtube.com/embed/Y7KMDOTrWK4?si=vzdHy43EG96Q9LE4",
+        },
+        {
+          breed: "德國牧羊犬",
+          size: "大型",
+          character: "聰明",
+          cares: "運動量大",
+          tags: ["狗類", "聰明"],
+          imageUrl: "https://imgs.699pic.com/images/600/526/079.jpg!list1x.v2",
+          videoUrl:
+            "https://www.youtube.com/embed/z9IAgJ6Nr1E?si=IUxVOsfJZEXnaHvG",
+        },
+        {
+          breed: "法國鬥牛犬",
+          size: "中型",
+          character: "熱情",
+          cares: "環境要求高",
+          tags: ["狗類", "熱情"],
+          imageUrl:
+            "https://www.niusnews.com/upload/imgs/default/202205_Jennie/0509dog/S__29499399.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/ct6IUxtjVIs?si=DyGmY61CGqr5U1ph",
+        },
+        {
+          breed: "邊境牧羊犬",
+          size: "中型",
+          character: "聰明",
+          cares: "運動量大",
+          tags: ["狗類", "聰明"],
+          imageUrl:
+            "https://cdn.pixabay.com/photo/2017/08/25/09/40/dog-2679548_640.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/gPW1FlCwRng?si=C5AadVm97PcUs3wh",
+        },
+        {
+          breed: "侏儒兔",
+          size: "小型",
+          character: "溫順",
+          cares: "梳毛",
+          tags: ["兔類", "溫順"],
+          imageUrl:
+            "https://megapx-assets.dcard.tw/images/c3a62083-719f-49ee-9c3d-d65c0ff70a55/640.jpeg",
+          videoUrl:
+            "https://www.youtube.com/embed/RJzigiWLB10?si=5-rznItFDKCoMgGc",
+        },
+        {
+          breed: "愛情鳥",
+          size: "小型",
+          character: "社交",
+          cares: "環境要求高",
+          tags: ["鳥類", "社交"],
+          imageUrl:
+            "https://www.niusnews.com/upload/imgs/default/202108_Evin/0803/woodstockwasabi_221863901_182951443852831_1391378448683774431_n.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/wTGdvlsGnsI?si=w_aFMMAVYBUo-jqM",
+        },
+        {
+          breed: "藍刀鯛",
+          size: "中型",
+          character: "獨立",
+          cares: "水質要求高",
+          tags: ["魚類", "獨立"],
+          imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIPRACH6HlJbNZgthc5cmsKaFSgvAuIq_9Yw&s",
+          videoUrl:
+            "https://www.youtube.com/embed/FQD-yC3FRig?si=i9-09ifF5hkh4mLL",
+        },
+        {
+          breed: "鬥魚",
+          size: "小型",
+          character: "獨立",
+          cares: "水質要求高",
+          tags: ["魚類", "獨立"],
+          imageUrl: "https://img95.699pic.com/xsj/2i/xr/1r.jpg!/fh/300",
+          videoUrl:
+            "https://www.youtube.com/embed/DeAUiKk6Aiw?si=H0Vs2J2Wb1JtLu03",
+        },
+        {
+          breed: "傘蜥蜴",
+          size: "中型",
+          character: "獨立",
+          cares: "曬太陽",
+          tags: ["爬蟲類", "獨立"],
+          imageUrl:
+            "https://p3-pc-sign.douyinpic.com/image-cut-tos-priv/4942f34b50d680775a680d6e16793356~tplv-dy-resize-origshort-autoq-75:330.jpeg?lk3s=138a59ce&x-expires=2059441200&x-signature=WpIkbqaWvdqZddPgWPk4dtTLXP8%3D&from=327834062&s=PackSourceEnum_AWEME_DETAIL&se=false&sc=cover&biz_tag=pcweb_cover&l=202504081101192996DD6F95DA8B5DBB1D",
+          videoUrl:
+            "https://www.youtube.com/embed/rLY2gNiOFzk?si=eB3BRrfcRaRtaCOj",
+        },
+        {
+          breed: "泰加巨蜥",
+          size: "大型",
+          character: "獨立",
+          cares: "曬太陽",
+          tags: ["爬蟲類", "獨立"],
+          imageUrl:
+            "https://media.istockphoto.com/id/924389494/zh/%E7%85%A7%E7%89%87/%E9%98%BF%E6%A0%B9%E5%BB%B7%E9%BB%91%E7%99%BD%E5%B7%A8%E4%BA%BA-tegu-tupinambis-merianae-%E6%88%96-salvator-merianae.jpg?s=612x612&w=0&k=20&c=87fOlR6C55ciqfKLAwwnMNenQs1yD7OchFLT7E3jW3A=",
+          videoUrl:
+            "https://www.youtube.com/embed/C55G1zWOJiQ?si=URVpmvYMzmhqDbG_",
+        },
+        {
+          breed: "天竺鼠",
+          size: "小型",
+          character: "熱情",
+          cares: "環境要求高",
+          tags: ["鼠類", "熱情"],
+          imageUrl:
+            "https://images.chinatimes.com/newsphoto/2021-01-23/656/20210123003216.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/1EzHw5U0-ZM?si=s2c7FU0T8uG7ik9v",
+        },
+        {
+          breed: "盾臂龜",
+          size: "中型",
+          character: "獨立",
+          cares: "環境要求高",
+          tags: ["爬蟲類", "獨立"],
+          imageUrl:
+            "https://img.shoplineapp.com/media/image_clips/63c120e469718f001debb7b4/original.jpg?1673601252",
+          videoUrl:
+            "https://www.youtube.com/embed/DWHjoHwu73Y?si=nrXhC9ysH9Mvs3Ii",
+        },
+        {
+          breed: "豹紋陸龜",
+          size: "中型",
+          character: "獨立",
+          cares: "環境要求高",
+          tags: ["爬蟲類", "獨立"],
+          imageUrl:
+            "https://uncleshofar.com/blog/wp-content/uploads/2022/03/IMG_4916.jpg",
+          videoUrl:
+            "https://www.youtube.com/embed/lYMoabnxy9Q?si=USpxRQRfQ7tbH0lq",
+        },
+      ];
+
+      const petList = document.getElementById("pet-list");
+      let filteredItems = [...items];
+
+      function renderItems() {
+        petList.innerHTML = "";
+        filteredItems.forEach((item) => {
+          const itemElement = document.createElement("ion-item");
+          itemElement.className = "list-item";
+          itemElement.innerHTML = `
+      <div class="item-content">
+        <div class="item-title">${item.breed}</div>
+        <div class="item-subtitle">${item.size} / ${item.character} / ${
+            item.cares
+          }</div>
+        <div class="item-details">
+          <img class="item-image" src="${item.imageUrl}" alt="${item.breed}">
+          <iframe class="item-video" src="${
+            item.videoUrl
+          }" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="tag-container">
+          ${item.tags
+            .map((tag) => `<ion-chip size="small">${tag}</ion-chip>`)
+            .join("")}
+        </div>
+      </div>
+    `;
+          petList.appendChild(itemElement);
+        });
+      }
+
+      const searchBar = document.getElementById("searchBar");
+
+      // function searchItems(event) {
+      //   const searchTerm = (event.detail.value || "").trim();
+      //   filteredItems = items.filter(
+      //     (item) =>
+      //       item.breed.includes(searchTerm) ||
+      //       item.character.includes(searchTerm) ||
+      //       item.cares.includes(searchTerm) ||
+      //       item.tags.some((tag) => tag.includes(searchTerm))
+      //   );
+      //   renderItems();
+      // }
+      searchBar.addEventListener("ionInput", filterItems);
+
+      function filterItems(event) {
+        const selectedCategory = event.target.value;
+        let size = sizeSelect.value;
+        let category = categorySelect.value;
+        let searchText = searchBar.value.trim().toLowerCase();
+        filteredItems = items.filter((item) => {
+          if (size && item.size != size) return false;
+          if (category && !item.tags.includes(category)) return false;
+          if (
+            !item.cares.includes(searchText) &&
+            !item.breed.includes(searchText)
+          )
+            return false;
+          return true;
+        });
+        renderItems();
+      }
+      sizeSelect.addEventListener("ionChange", filterItems);
+      categorySelect.addEventListener("ionChange", filterItems);
+
+      // 初始化渲染
+      renderItems();
+    </script>
+  </body>
+</html>
