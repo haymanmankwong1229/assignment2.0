@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>開源硬體清單</title>
+    <!-- Ionic CDN -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <ion-app>
+      <ion-header>
+        <ion-toolbar class="soft-toolbar">
+          <ion-title>The Pet</ion-title>
+
+          <ion-item>
+            <ion-select id="categorySelect" label="分類" interface="popover">
+              <ion-select-option value="">全部</ion-select-option>
+              <ion-select-option value="貓類">貓類</ion-select-option>
+              <ion-select-option value="狗類">狗類</ion-select-option>
+              <ion-select-option value="魚類">魚類</ion-select-option>
+              <ion-select-option value="鼠類">鼠類</ion-select-option>
+              <ion-select-option value="兔類">兔類</ion-select-option>
+              <ion-select-option value="鳥類">鳥類</ion-select-option>
+              <ion-select-option value="爬蟲類">爬蟲類</ion-select-option>
+            </ion-select>
+            <ion-select id="sizeSelect" label="體型" interface="popover">
+              <ion-select-option value="size">體型</ion-select-option>
+              <ion-select-option value="小型">小型</ion-select-option>
+              <ion-select-option value="中型">中型</ion-select-option>
+              <ion-select-option value="大型">大型</ion-select-option>
+                 </ion-select
+            >
+          </ion-item>
+          <ion-searchbar id="searchBar" placeholder="搜尋..."></ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list id="pet-list">
+          <!-- 清單項目範本 -->
+          <!-- 這些項目會通過 JavaScript 動態生成 -->
+        </ion-list>
+      </ion-content>
+          </ion-card>
+        </ion-list>
+
+        <ion-button id="prevPageButton" expand="block" hidden>
+          上一頁
+        </ion-button>
+        <ion-button id="nextPageButton" expand="block" hidden>
+          下一頁
+        </ion-button>
+
+        <ion-modal id="loginModal">
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>登入</ion-title>
+              <ion-buttons slot="start">
+                <ion-button color="light"> Close </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-list>
+              <ion-input
+                id="usernameInput"
+                type="text"
+                label="帳號"
+              ></ion-input>
+              <ion-input
+                id="passwordInput"
+                type="password"
+                label="密碼"
+              ></ion-input>
+              <ion-button expand="block" id="loginButton">登入</ion-button>
+              <ion-button expand="block" id="registerButton">註冊</ion-button>
+            </ion-list>
+          </ion-content>
+        </ion-modal>
+
+        <ion-toast id="errorToast" duration="5000" color="danger"></ion-toast>
+      </ion-content>
+    </ion-app>
+
+    <ion-toast id="error-toast"></ion-toast>
+
+    <script src="bundle.js"></script>
+  </body>
+</html>
