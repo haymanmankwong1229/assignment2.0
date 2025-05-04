@@ -17,6 +17,7 @@ body {
     font-size: 1.2em;
     font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
     background-color: rgb(179, 249, 226);
+    color: #317823; 
 
     border-top-left-radius: 2em 0.5em;
     border-top-right-radius: 1em 3em;
@@ -214,4 +215,26 @@ body {
   .filter-row ion-select {
     flex: 1;
     min-width: 120px;
+  }
+
+  /* src/styles.css */
+:root {
+    --ion-color-success: #b1d4b198; /* 淺綠色 */
+    --ion-color-success-rgb: 144, 238, 144; /* RGB 值，用於某些 Ionic 組件的透明效果 */
+    --ion-color-success-contrast: #000000; /* 對比色，通常是黑色或白色，確保文字可讀 */
+    --ion-color-success-contrast-rgb: 0, 0, 0;
+    --ion-color-success-shade: #7ed17e; /* 較深的陰影色 */
+    --ion-color-success-tint: #9cf19c; /* 較亮的色調 */
+  }
+
+
+  /* src/styles.css */
+.small-button {
+    --padding-start: 12px; /* 縮小左右內邊距 */
+    --padding-end: 12px;
+    --padding-top: 8px; /* 縮小上下內邊距 */
+    --padding-bottom: 8px;
+    --border-radius: 4px; /* 可選：調整圓角 */
+    width: auto; /* 確保按鈕寬度根據內容自適應 */
+    font-size: 14px; /* 縮小文字大小 */
   }

@@ -22,14 +22,19 @@
   <body>
     <ion-app>
       <ion-header>
-        <ion-toolbar class="soft-toolbar" color="primary">
+        <ion-toolbar class="soft-toolbar" color="success">
           <ion-title>The Pet</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="light" id="refreshButton">
+            <ion-button color="dark" id="refreshButton">
               <ion-icon name="refresh" slot="icon-only"></ion-icon>
             </ion-button>
           </ion-buttons>
          
+          <ion-buttons slot="start">
+            <ion-button fill="clear" size="small" href="login.html">登入</ion-button>
+            <ion-button fill="clear" size="small" href="register.html">註冊</ion-button>
+          </ion-buttons>
+        
         </ion-toolbar>
         <ion-item>
           <ion-select id="categorySelect" label="分類" interface="popover">
@@ -51,6 +56,16 @@
           >
         </ion-item>
         <ion-searchbar id="searchBar" placeholder="搜尋..."></ion-searchbar>
+
+          
+        <ion-button id="prevPageButton" class="small-button" hidden color="success">
+          上一頁
+        </ion-button>
+        <ion-button id="nextPageButton" class="small-button" hidden color="success">
+          下一頁
+        </ion-button>
+      
+
       </ion-header>
 
       <ion-content>
@@ -86,11 +101,11 @@
 
           <ion-card class="item-card">
             <ion-card-header>
-              <ion-card-title class="item-title"></ion-card-title>
-              <ion-card-subtitle class="item-subtitle"></ion-card-subtitle>
               <ion-button class="favorite-btn" fill="clear">
                 <ion-icon name="star" slot="icon-only"></ion-icon>
               </ion-button>
+              <ion-card-title class="item-title"></ion-card-title>
+              <ion-card-subtitle class="item-subtitle"></ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               <p class="item-details"></p>
@@ -117,13 +132,12 @@
       </ion-content>
           </ion-card>
         </ion-list>
+        
 
-        <ion-button id="prevPageButton" expand="block" hidden>
-          上一頁
-        </ion-button>
-        <ion-button id="nextPageButton" expand="block" hidden>
-          下一頁
-        </ion-button>
+        
+       
+        
+       
 
         <ion-modal id="loginModal">
           <ion-header>
